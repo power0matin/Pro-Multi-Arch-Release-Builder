@@ -3,12 +3,12 @@ on:
   workflow_dispatch:
     inputs:
       input_zip:
-        description: 'Path to input .zip within repo'
-        default: 'input/project.zip'
+        description: "Path to input .zip within repo"
+        default: "input/project.zip"
         required: true
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   release:
@@ -20,7 +20,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.22.x'
+          go-version: "1.22.x"
           check-latest: true
 
       - name: Install system deps

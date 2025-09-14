@@ -11,7 +11,6 @@
 
 > Drop `input/<name>.zip` in the repo, run one command, and get a full GitHub‑Release‑ready bundle: cross‑compiled archives, SHA256 checksums, a human‑readable **RELEASE.md**, and a machine‑readable **release.manifest.json**.
 
-
 ## Table of Contents
 
 - [Features](#features)
@@ -32,7 +31,6 @@
 - [Repository Layout](#repository-layout)
 - [License](#license)
 
-
 ## Features
 
 - ✅ **Dynamic naming**: all asset filenames are **prefixed by your input ZIP name**. `input/myapp.zip` → `myapp-linux-amd64.tar.gz`, `myapp-windows-amd64.zip`, etc.
@@ -45,7 +43,6 @@
 - 🧪 **Makefile** for local developer ergonomics.
 - 🧰 **Highly configurable**: binary name, artifact prefix, build path, CGO, linker flags, and more.
 
-
 ## Requirements
 
 - OS: Linux/macOS with a POSIX shell (Bash)
@@ -53,7 +50,6 @@
 - Optional: Docker (recommended for consistent toolchains)
 
 > If your project requires CGO or native libraries, prefer running the build in a container or a CI runner with the proper cross‑toolchains installed.
-
 
 ## Quick Start
 
@@ -72,7 +68,6 @@ chmod +x build.sh
    - `./myapp/Assets/*`
    - `./myapp/RELEASE.md`
    - `./myapp/release.manifest.json`
-
 
 ## Naming (Your Request)
 
@@ -93,7 +88,6 @@ chmod +x build.sh
 > export ARTIFACT_PREFIX=myrelease
 > ```
 
-
 ## How It Works
 
 ```mermaid
@@ -113,7 +107,6 @@ flowchart LR
 - **Windows**: `amd64` → `zip`
 
 > Internally, builds are performed with `CGO_ENABLED=0` by default to keep artifacts portable. If you need CGO, set `CGO_ENABLED=1` and ensure toolchains exist for each target.
-
 
 ## Outputs
 
@@ -177,7 +170,6 @@ And a machine‑readable `release.manifest.json`:
       └── myapp-windows-amd64.sha256
 ```
 
-
 ## Configuration & Environment Variables
 
 | Variable            | Default                     | Purpose                                                                                       |
@@ -198,7 +190,6 @@ And a machine‑readable `release.manifest.json`:
 - **TZ**: forced to `UTC`
 - Checksums: SHA256 sidecars without archive suffix, simplifying copy‑into release notes.
 
-
 ## Docker (Reproducible / Isolated)
 
 **Build image:**
@@ -214,7 +205,6 @@ docker run --rm -v "$PWD:/work" pro-release bash -lc './build.sh input/myapp.zip
 ```
 
 > This pins toolchain versions and avoids host‑specific differences.
-
 
 ## CI/CD on GitHub Actions
 
@@ -236,7 +226,6 @@ Update badges/links to your repo: replace `your-org/your-repo` in badge URLs.
 - Non‑tag builds: `actions/upload-artifact` attaches `Assets/*`.
 - Tag builds: `softprops/action-gh-release` uploads assets to the Release page.
 
-
 ## Versioning & Releases
 
 - **SemVer**: `MAJOR.MINOR.PATCH`
@@ -250,7 +239,6 @@ Suggested flow:
 
 > Optionally add `CHANGELOG.md` generation using a conventional‑changelog action or `semantic-release` if desired.
 
-
 ## Extending the Platform Matrix
 
 1. Edit target arrays in `build.sh` (`linux_targets` / `windows_targets`).
@@ -258,7 +246,6 @@ Suggested flow:
 3. Reflect changes in this README.
 
 > Architectures requiring CGO or special libc (e.g., musl) should be built inside a compatible container or runner. Consider a multi‑stage Dockerfile for musl.
-
 
 ## Troubleshooting
 
@@ -273,13 +260,11 @@ Suggested flow:
 - **Checksum mismatch**
   Any change to artifacts invalidates checksums. Re‑run `build.sh` after modifications.
 
-
 ## Security Policy
 
 If you discover a security issue, please use responsible disclosure. You can open a private security advisory in GitHub or contact the maintainers via email.
 
 > For enterprises, add a `SECURITY.md` with contact details and supported branches.
-
 
 ## Contributing & Code Style
 
@@ -293,7 +278,6 @@ If you discover a security issue, please use responsible disclosure. You can ope
 - Optional repository additions:
 
   - `CONTRIBUTING.md`, `CODEOWNERS`, Issue/PR templates, and automated changelog generation.
-
 
 ## FAQ
 
@@ -314,7 +298,6 @@ sha256sum -c myapp-linux-amd64.sha256 < myapp-linux-amd64.tar.gz
 
 (Or compute and compare manually: `sha256sum myapp-linux-amd64.tar.gz`.)
 
-
 ## Repository Layout
 
 ```
@@ -329,7 +312,6 @@ sha256sum -c myapp-linux-amd64.sha256 < myapp-linux-amd64.tar.gz
 ├─ Makefile
 └─ README.md
 ```
-
 
 ## License
 
